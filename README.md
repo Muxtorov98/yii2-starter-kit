@@ -37,7 +37,3 @@ return [
 7 php composer.phar require mdmsoft/yii2-admin "~2.0"
 
 8 php yii migrate --migrationPath=@yii/rbac/migrations/
-
-
-
-cc
