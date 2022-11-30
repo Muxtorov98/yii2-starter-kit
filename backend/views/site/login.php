@@ -7,54 +7,108 @@ use yii\bootstrap\ActiveForm;
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \common\models\LoginForm */
 
-$this->title = 'Sign In';
-
-$fieldOptions1 = [
-    'options' => ['class' => 'form-group has-feedback'],
-    'inputTemplate' => "{input}<span class='glyphicon glyphicon-envelope form-control-feedback'></span>"
-];
-
-$fieldOptions2 = [
-    'options' => ['class' => 'form-group has-feedback'],
-    'inputTemplate' => "{input}<span class='glyphicon glyphicon-lock form-control-feedback'></span>"
-];
+$this->title = Yii::t('app', 'Login');
 ?>
 
-<div class="login-box">
-    <div class="login-logo">
-        <a href="#"><b>Admin</b> Panel</a>
-    </div>
-    <!-- /.login-logo -->
-    <div class="login-box-body">
-        <p class="login-box-msg">Sign in to start your session</p>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+    body{
+        font-family: 'Poppins', sans-serif;
+        background-color: #fff;
+    }
+    .contents {
+        margin: 8%;
+        margin-top: 20%;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 4px;
+        background-color: #fff;
+        padding: 4rem 1rem 4rem 1rem;
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+    }
+    .signin-text{
+        font-style: normal;
+        font-weight: 600 !important;
 
-        <?php $form = ActiveForm::begin(['id' => 'login-form', 'enableClientValidation' => false]); ?>
+    }
+    .form-control{
+        display: block;
+        width:100%;
+        font-weight: 400;
+        line-height:1.5;
+        border-color: #246EB3 !important;
+        border-style: solid !important;
+        border-width: 0 0 1px 0 !important;
 
-        <?= $form
-            ->field($model, 'username', $fieldOptions1)
-            ->label(false)
-            ->textInput(['placeholder' => $model->getAttributeLabel('username')]) ?>
+        color:#495057;
+        height: auto;
+        border-radius: 0;
+        background-color: #fff;
+        background-clip: padding-box;
+    }
 
-        <?= $form
-            ->field($model, 'password', $fieldOptions2)
-            ->label(false)
-            ->passwordInput(['placeholder' => $model->getAttributeLabel('password')]) ?>
 
-        <div class="row">
-            <div class="col-xs-8">
-                <?= $form->field($model, 'rememberMe')->checkbox() ?>
-            </div>
-            <!-- /.col -->
-            <div class="col-xs-4">
-                <?= Html::submitButton('Sign in', ['class' => 'btn btn-primary btn-block btn-flat', 'name' => 'login-button']) ?>
-            </div>
-            <!-- /.col -->
+    .form-control:focus{
+        color: #246EB3;
+        background-color: #fff;
+        border-color: #fff;
+        outline: 0;
+        box-shadow: none;
+    }
+    .birthday-section{
+        padding: 15px;
+    }
+    .btn-class{
+        background: #33b5e5;
+        border:none;
+        color: #fff;
+        width: 100%;
+    }
+
+    .btn-class:hover{
+        background: #33b5e5;
+        box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+        color: #fff;
+        width: 100%;
+    }
+
+</style>
+
+<body style="background: #fff">
+<div class="container">
+    <div class="row contents">
+        <div class="col-md-6 mb-3">
+            <img width="100%" src="/admin/img/yii.jpeg" class="img-flud" alt="image">
         </div>
-
-
-        <?php ActiveForm::end(); ?>
-
-
+        <div class="col-md-6">
+            <h1 style="text-align: center" class="signin-text mb-3">Yii2 <span style="color: #33b5e5"> project </span></h1>
+            <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+            <div class="form-group">
+                <label>Login</label>
+                <?= $form->field($model, 'username')->textInput(['id' => 'login'])->label(false) ?>
+            </div>
+            <div class="form-group">
+                <label>Parol</label>
+                <?= $form->field($model, 'password')->passwordInput(['id' => 'password'])->label(false) ?>
+            </div>
+            <br>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="checkbox" name="LoginForm[rememberMe]" value="1"  aria-invalid="false">
+                <label class="form-check-label" for="checkbox">Meni eslab qol</label>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-class w-100 py-2">Krish</button>
+            <?php ActiveForm::end(); ?>
+        </div>
     </div>
-
 </div>
+</body>
+
+
+
+
+
+
+
+
+
