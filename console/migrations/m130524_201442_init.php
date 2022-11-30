@@ -24,6 +24,21 @@ class m130524_201442_init extends Migration
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
         ], $tableOptions);
+        
+         $this->insert('{{%user}}', [
+            'username' => 'Tulqin',
+            'auth_key' => \Yii::$app->security->generateRandomString(20),
+            'password_hash' => \Yii::$app->security->generatePasswordHash("12345"),
+            'password_reset_token' => null,
+          //  'access_token' => \Yii::$app->security->generateRandomString(),
+          //  'access_token_time' => time(),
+            'email' => 'tulqin@gmail.com',
+            'role_id' => 'su_admin',
+            'is_admin' => 1,
+            'status' => 10,
+            'created_at' => time(),
+            'updated_at' => time(),
+        ]);
     }
 
     public function down()
