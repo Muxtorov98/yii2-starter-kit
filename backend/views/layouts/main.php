@@ -22,6 +22,7 @@ $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed201
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <?php $this->beginBody() ?>
+    <?php if (!Yii::$app->user->isGuest): ?>
 <div class="wrapper">
 
     <?= $this->render(
@@ -41,7 +42,13 @@ $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed201
     ) ?>
 
 </div>
+<?php else: ?>
 
+<div style="width:100%; height:100%; display: flex; justify-content: center; align-items: center;">
+    <img style="width: 100% height:100%; margin-top: 7% " src="/admin/img/aaaas.svg" alt="">
+</div>
+
+<?php endif; ?>
 <?php $this->endBody() ?>
 </body>
 </html>
