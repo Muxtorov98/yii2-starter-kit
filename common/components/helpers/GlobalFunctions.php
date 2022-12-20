@@ -67,6 +67,21 @@ function api_json_output($type = 'error', $array = array())
     return $output;
 }
 
+// passpot sera_raqami
+function passera_num($model)
+{
+   $index = $model->sera_num;
+   $sera = $index[2].$index[3].$index[4].$index[5].$index[6].$index[7].$index[8].$index[9];
+   return $sera;
+}
+// passport serasi
+function passera($model)
+{
+   $index = $model->sera_num;
+   $sera = $index[0].$index[1];
+   return $sera;
+}
+
 
 // passport malumotlarini olish api
 function passport($sera, $sera_num, $data)
