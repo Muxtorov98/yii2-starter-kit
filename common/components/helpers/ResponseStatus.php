@@ -2,8 +2,6 @@
 namespace common\components\helpers;
 class ResponseStatus
 {
-
-
     const OK = 200;
     const CREATED = 201;
     const NO_CONTENT = 204;
