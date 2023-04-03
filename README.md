@@ -16,7 +16,7 @@ php -r "unlink('composer-setup.php');"
 
 4 common/config/main-local.php/ 
 
-<?php
+`
 
 return [
     'components' => [
@@ -37,8 +37,10 @@ return [
         ]
     ],
 ];
+`
 
-5 php yii migrate
+migratsiya qilish
+` php yii migrate`
 
 6 php yii migrate --migrationPath=@yii/i18n/migrations/
 
