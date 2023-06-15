@@ -1,8 +1,9 @@
 # IMAF Yii2 Starter Kit
 
-1 git clone https://github.com/Muxtorov98/yii2advanced.git
+git clone https://github.com/Muxtorov98/yii2advanced.git
 
 Go to the project directory
+
 `cd yii2advanced`
 
 `php init`
@@ -17,11 +18,17 @@ Install composer scripts:
 Migrations
 
 i18 migrate
+
 `docker compose run --rm php yii migrate --migrationPath=@yii/i18n/migrations/`
+
 role rbac migrate
+
 `docker compose exec php require mdmsoft/yii2-admin "~2.0"`
+
 `docker compose run --rm php --migrationPath=@yii/rbac/migrations/`
+
 yii migrate
+
 `docker compose run --rm php yii migrate`
 
 Done! You can open http://localhost:8087/ via browser. By the way, you can change this port by changing
