@@ -17,7 +17,7 @@ Install composer scripts:
 
 Migrations
 
-i18 migrate
+i18n language migrate
 
 `docker compose run --rm php yii migrate --migrationPath=@yii/i18n/migrations/`
 
