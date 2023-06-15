@@ -1,38 +1,57 @@
-version: '3.2'
+version: '3'
 
 services:
-
-  frontend:
-    build: frontend
-    ports:
-      - 20080:80
+  php:
+    container_name: ${DOCKER_PROJECT_NAME}_php   # PHP xizmatining konteyner nomi
+    restart: unless-stopped   # Konteyner o'chirilgandan so'ng avtomatik ravishda qayta ishga tushiriladi
     volumes:
-      # Re-use local composer cache via host-volume
-      - ~/.composer-docker/cache:/root/.composer/cache:delegated
-      # Mount source-code for development
-      - ./:/app
+      - ./:/var/www/html   # Loyiha fayllarini PHP xizmatining /var/www/html direktoriyasiga ulash
+      - ./docker/php/php.ini:/usr/local/etc/php/php.ini   # PHP konfiguratsiya faylini joylash
+      # Agar supervisordan foydalanilsa
+      #- ./docker/php/supervisor/messenger-worker.conf:/etc/supervisor/conf.d/messenger-worker.conf
+    build: ./docker/php   # PHP xizmatini Dockerfile asosida qurish
+    depends_on:
+      - mysql   # PHP xizmatining ishlash uchun MySQL xizmatiga bog'liqligi
 
-  backend:
-    build: backend
-    ports:
-      - 21080:80
+  nginx:
+    container_name: ${DOCKER_PROJECT_NAME}_nginx   # Nginx xizmatining konteyner nomi
+    image: nginx:1.19   # Nginx rasmiy afzalliklarga ega rasmiy imaji
+    restart: unless-stopped   # Konteyner o'chirilgandan so'ng avtomatik ravishda qayta ishga tushiriladi
     volumes:
-      # Re-use local composer cache via host-volume
-      - ~/.composer-docker/cache:/root/.composer/cache:delegated
-      # Mount source-code for development
-      - ./:/app
+      - ./docker/nginx/logs:/var/log/nginx   # Nginx loglarini saqlash uchun papka
+      - ./:/var/www/html   # Loyiha fayllarini Nginx xizmatining /var/www/html direktoriyasiga ulash
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf   # Nginx konfiguratsiya faylini joylash
+      #- ./uploads:/var/www/html/uploads
+    depends_on:
+      - mysql   # Nginx xizmatining ishlash uchun MySQL xizmatiga bog'liqligi
+    ports:
+      - 127.0.0.1:${DOCKER_NGINX_PORT}:80   # Hostning 127.0.0.1 IP manzilida 80-portni Nginx xizmatiga ulash
 
   mysql:
-    image: mysql:5.7
+    image: mariadb:10.5.2   # MariaDB rasmiy afzalliklarga ega rasmiy imaji
+    restart: unless-stopped   # Konteyner o'chirilgandan so'ng avtomatik ravishda qayta ishga tushiriladi
     environment:
-      - MYSQL_ROOT_PASSWORD=verysecret
-      - MYSQL_DATABASE=yii2advanced
-      - MYSQL_USER=yii2advanced
-      - MYSQL_PASSWORD=secret
+      - MYSQL_ROOT_PASSWORD=${DATABASE_ROOT_PASSWORD}   # MySQL bosh parolini sozlash
+      - MYSQL_DATABASE=${DOCKER_PROJECT_NAME}   # MySQL ma'lumotlar bazasini sozlash
+    volumes:
+      # - ./sql:/sql
+      - ./docker/mysql/db:/var/lib/mysql   # MySQL ma'lumotlar bazasini saqlash uchun direktoriyani ulash
+    ports:
+      - 127.0.0.1:${DOCKER_DATABASE_PORT}:3306   # Hostning 127.0.0.1 IP manzilida 3306-portni MySQL xizmatiga ulash
 
-  #pgsql:
-  #  image: postgres:9.5
-  #  environment:
-  #    - POSTGRES_DB=yii2advanced
-  #    - POSTGRES_USER=yii2advanced
-  #    - POSTGRES_PASSWORD=secret
+  phpmyadmin:
+    container_name: ${DOCKER_PROJECT_NAME}_admin   # PhpMyAdmin konteynerining nomi
+    image: phpmyadmin/phpmyadmin   # PhpMyAdmin rasmiy afzalliklarga ega rasmiy imaji
+    ports:
+      - 127.0.0.1:${DOCKER_DB_ADMIN_PORT}:80   # Hostning 127.0.0.1 IP manzilida 80-portni PhpMyAdmin xizmatiga ulash
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql   # PhpMyAdmin uchun hostni sozlash
+    depends_on:
+      - mysql   # PhpMyAdmin xizmatining ishlash uchun MySQL xizmatiga bog'liqligi
+
+#    redis:
+#        image: redis:6.0.10-alpine
+#        restart: unless-stopped
+#        container_name: ${DOCKER_PROJECT_NAME}_redis
+

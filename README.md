@@ -2,48 +2,46 @@
 
 1 git clone https://github.com/Muxtorov98/yii2advanced.git
 
+Go to the project directory
+`cd yii2advanced`
 
-php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-php -r "if (hash_file('sha384', 'composer-setup.php') === '55ce33d7678c5a611085589f1f3ddf8b3c52d662cd01d4ba75c0ee0459970c2200a51f492d557530c71c15d8dba01eae') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-php composer-setup.php
-php -r "unlink('composer-setup.php');"
+`php init`
 
+Run docker containers
+`docker compose up -d`
 
+Install composer scripts:
 
-2 php composer.phar install || php composer.phar install --ignore-platform-reqs
+`docker compose exec php composer install`
 
-3 php init 
+Migrations
 
-4 common/config/main-local.php/ 
+i18 migrate
+`docker compose run --rm php yii migrate --migrationPath=@yii/i18n/migrations/`
+role rbac migrate
+`docker compose exec php require mdmsoft/yii2-admin "~2.0"`
+`docker compose run --rm php --migrationPath=@yii/rbac/migrations/`
+yii migrate
+`docker compose run --rm php yii migrate`
 
-`
+Done! You can open http://localhost:8087/ via browser. By the way, you can change this port by changing
 
-return [
-    'components' => [
-        'db' => [
-            'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=yii2db',
-            'username' => 'root',
-            'password' => '',
-            'charset' => 'utf8',
-        ],
-        'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
-            'viewPath' => '@common/mail',
-            'useFileTransport' => true,
-        ],
-        'authManager' => [
-            'class' => 'yii\rbac\DbManager', // or use 'yii\rbac\DbManager'
-        ]
-    ],
-];
-`
+`DOCKER_NGINX_PORT` variable in .env file.
 
-migratsiya qilish
-` php yii migrate`
+# Docker
 
-6 php yii migrate --migrationPath=@yii/i18n/migrations/
+For enter to php container run `docker compose exec php bash`
 
-7 php composer.phar require mdmsoft/yii2-admin "~2.0"
+For enter to mysql container run `docker compose exec mysql bash`
 
-8 php yii migrate --migrationPath=@yii/rbac/migrations/
+For enter to nginx container run `docker compose exec nginx bash`
+
+You can change containers prefix by changing `DOCKER_PROJECT_NAME` variable in .env file.
+
+`common -> config -> main-local.php`
+
+`'authManager' => [
+      'class' => 'yii\rbac\DbManager', // or use 'yii\rbac\DbManager'
+]`
+
+![img.png](img.png)
