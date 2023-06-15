@@ -36,7 +36,10 @@
         "kartik-v/yii2-dialog": "dev-master",
         "kartik-v/yii2-widget-growl": "dev-master",
         "kartik-v/yii2-widget-alert": "dev-master",
-        "codemix/yii2-localeurls": "^1.7"
+        "codemix/yii2-localeurls": "^1.7",
+        "cetver/yii2-language-selector": "^1.0",
+        "rodzadra/geolocation": "dev-master",
+        "yiithings/yii2-dotenv": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
