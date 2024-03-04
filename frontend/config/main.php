@@ -18,6 +18,11 @@ return [
             'baseUrl' => '',
             'csrfParam' => '_csrf-frontend',
         ],
+        'assetManager' => [
+            'baseUrl' => '/frontend/web/assets',
+            // ...
+        ],
+
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
@@ -39,7 +44,6 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        'backendUrlManager' => require __DIR__ . '/../../backend/config/urlManager.php',
         'frontendUrlManager' => require __DIR__ . '/UrlManager.php',
         'urlManager' => function () {
             return Yii::$app->get('frontendUrlManager');

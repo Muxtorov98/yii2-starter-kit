@@ -5,7 +5,7 @@
 return [
     'class' => 'codemix\localeurls\UrlManager',
     'hostInfo' => $params['backendHostInfo'],
-//    'baseUrl' => '',
+    //'baseUrl' => '',
     'enablePrettyUrl' => true,
     'showScriptName' => false,
     'rules' => [

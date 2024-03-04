@@ -30,6 +30,10 @@ return [
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
         ],
+        'assetManager' => [
+            'baseUrl' => '/backend/web/assets',
+            // ...
+        ],
         'session' => [
             // this is the name of the session cookie used for login on the backend
             'name' => 'advanced-backend',
@@ -47,7 +51,6 @@ return [
             'errorAction' => 'site/error',
         ],
         'backendUrlManager' => require __DIR__ . '/UrlManager.php',
-        'frontendUrlManager' => require __DIR__ . '/../../frontend/config/urlManager.php',
         'urlManager' => function () {
             return Yii::$app->get('backendUrlManager');
         },

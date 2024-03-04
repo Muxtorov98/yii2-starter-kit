@@ -39,7 +39,8 @@
         "codemix/yii2-localeurls": "^1.7",
         "cetver/yii2-language-selector": "^1.0",
         "rodzadra/geolocation": "dev-master",
-        "yiithings/yii2-dotenv": "*"
+        "yiithings/yii2-dotenv": "*",
+        "mdmsoft/yii2-admin": "~2.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
@@ -56,6 +57,9 @@
         "process-timeout": 1800,
         "fxp-asset": {
             "enabled": false
+        },
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true
         }
     },
     "repositories": [

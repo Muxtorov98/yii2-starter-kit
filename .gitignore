@@ -23,6 +23,22 @@ Thumbs.db
 # composer itself is not needed
 composer.phar
 
+# phpStorm
+/.idea
+
+# docker
+/docker/mysql/db
+/docker/nginx/logs
+/docker/php/bash_history
+/docker/php/error_logs
+
+###> symfony/framework-bundle ###
+/.env
+/.env.test
+/.env.local
+/.env.local.php
+/.env.*.local
+
 # Mac DS_Store Files
 .DS_Store
 

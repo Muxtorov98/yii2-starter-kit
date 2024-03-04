@@ -13,23 +13,29 @@ Run docker containers
 
 Install composer scripts:
 
-`docker compose exec php composer install`
+`docker compose exec php composer update`
 
 Migrations
 
 i18n language migrate
 
-`docker compose run --rm php yii migrate --migrationPath=@yii/i18n/migrations/`
+`docker compose exec php yii migrate --migrationPath=@yii/i18n/migrations/`
 
 role rbac migrate
 
-`docker compose exec php require mdmsoft/yii2-admin "~2.0"`
+`docker compose exec php composer require mdmsoft/yii2-admin "~2.0"`
+config
+`common -> config -> main-local.php`
 
-`docker compose run --rm php --migrationPath=@yii/rbac/migrations/`
+`'authManager' => [
+'class' => 'yii\rbac\DbManager', // or use 'yii\rbac\DbManager'
+]`
+
+`docker compose exec php yii migrate --migrationPath=@yii/rbac/migrations/`
 
 yii migrate
 
-`docker compose run --rm php yii migrate`
+`docker compose exec php yii migrate`
 
 Done! You can open http://localhost:8087/ via browser. By the way, you can change this port by changing
 
@@ -45,10 +51,6 @@ For enter to nginx container run `docker compose exec nginx bash`
 
 You can change containers prefix by changing `DOCKER_PROJECT_NAME` variable in .env file.
 
-`common -> config -> main-local.php`
 
-`'authManager' => [
-      'class' => 'yii\rbac\DbManager', // or use 'yii\rbac\DbManager'
-]`
 
 ![img.png](img.png)
