@@ -83,26 +83,6 @@ function passera($model)
 }
 
 
-// passport malumotlarini olish api
-function passport($sera, $sera_num, $data)
-{
-   $url = "https://api.online-mahalla.uz/api/v1/public/tax/passport?series=$sera&number=$sera_num&birth_date=$data";
-   $curl = curl_init();
-   curl_setopt($curl, CURLOPT_URL, $url);
-   curl_setopt($curl,CURLOPT_RETURNTRANSFER, true);
-   curl_setopt($curl, CURLOPT_ENCODING, '');
-   curl_setopt($curl, CURLOPT_MAXREDIRS, 10);
-   curl_setopt($curl, CURLOPT_TIMEOUT, 0);
-   curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
-   curl_setopt($curl, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
-   curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET');
-   curl_setopt($curl, CURLOPT_POSTFIELDS, 'series=1');
-   $result=curl_exec($curl);
-   $result=json_decode($result);
-   return $result->data->info->data;
-}
-
-
 // Not use because this does not work message extract
 function t($message, $category = 'ui', $language = null, $params = [])
 {

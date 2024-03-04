@@ -4,6 +4,7 @@ namespace backend\modules\settings\controllers;
 
 use backend\modules\settings\models\Message;
 use backend\modules\settings\models\search\SourceMessageSearch;
+use backend\modules\settings\models\SourceMessage;
 use Yii;
 
 /**
